@@ -20,13 +20,23 @@ var init = function (window) {
         ////////////////////////////////////////////////////////////
         
         // TODO 1 : Declare and initialize our variables
+        var circle;   
+        var circles = [];
 
+        // TODO 2 : Create a function that draws a circle
+        function drawCircle () { 
+            circle = draw.randomCircleInArea(canvas, true, true, '#999', 2);
+            physikz.addRandomVelocity(circle, canvas);
+            view.addChild(circle);
+            circles.push(circle);
+        }
 
-        // TODO 2 : Create a function that draws a circle 
-        
 
         // TODO 3 / 8 : Call the drawCircle() function 
-
+        for (var i = 0; i < 100; i++) {
+                    drawCircle();
+                 }
+        
 
         ////////////////////////////////////////////////////////////
         ///////////////// PROGRAM LOGIC ////////////////////////////
@@ -39,15 +49,19 @@ var init = function (window) {
         */
         function update() {
             // TODO 4 : Update the circle's position //
+            for (var i = 0; i < 100; i++)  {
+               physikz.updatePosition(circles[i]);
+               game.checkCirclePosition(circles[i]);
+        }
 
-            
             // TODO 5 / 10 : Call game.checkCirclePosition() on your circles.
-           
-
+            
+            
+        }
             // TODO 9 : Iterate over the array
            
             
-        }
+        
     
         /* 
         This Function should check the position of a circle that is passed to the 
@@ -60,14 +74,24 @@ var init = function (window) {
             if ( circle.x > canvas.width ) {
                 circle.x = 0;
             }
-            
+             if ( circle.x < 0)   {
+                circle.x = canvas.width;
+             }
+             if ( circles.y > canvas.height) {
+              circle.y = 0;
+           }
+            if ( circles.y < 0) {
+               circle.y = canavs.height;
+            }
+
             // TODO 7 : YOUR CODE STARTS HERE //////////////////////
             
 
 
             // YOUR TODO 7 CODE ENDS HERE //////////////////////////
-        }
-        
+
+          }
+
         /////////////////////////////////////////////////////////////
         // --- NO CODE BELOW HERE  --- DO NOT REMOVE THIS CODE --- //
         /////////////////////////////////////////////////////////////
